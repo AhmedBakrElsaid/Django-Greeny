@@ -4,11 +4,16 @@ from django.shortcuts import render
 from django.views.generic import ListView , DetailView
 
 from .models import Category, Product , Brand
+from django.db.models import Q,F 
+from django.db.models.aggregates import Count,Min,Max,Sum,Avg
 # Create your views here.
 
-def post_list (request):
-    products = Product.objects.all()
-    return render (request,'products/product_list_test.html',{})
+def product_list (request):
+    products = Product.objects.select_related('category').select_related('brand').all()
+    products = Product.objects.aggregate(Sum('quantity'))
+    return render (request,'products/product_list_test.html',{'products':products})
+
+
 
 
 
