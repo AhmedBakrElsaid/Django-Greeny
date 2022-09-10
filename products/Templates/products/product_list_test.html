@@ -8,15 +8,15 @@
 </head>
 <body>
 
-    <h2>{{products}}</h2>
-    {%comment%}
+    
+    
     <ul>
         {% for product in products %}
-            <li>{{product}}-{{product.price}}-{{product.category}}-{{product.brand}}</li>
+            <li>{{product}}-{{product.price}}-{{product.avg_review}}}</li>
         {% endfor %}
     
     </ul>
-    {%endcomment%}
+    
 </body>
 </html>
 

@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.core.validators import MinValueValidator,MaxValueValidator
 from taggit.managers import TaggableManager
 from django.utils.text import slugify
+from django.db.models.aggregates import Avg
 
 
 
@@ -41,6 +42,10 @@ class Product (models.Model):
     def save (self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Product,self).save(*args,**kwargs)
+    
+    def avg_review(self):
+        avg = self.product_review.aggregate(avg=Avg('rate'))
+        return avg
     
     
 
